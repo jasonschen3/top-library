@@ -39,6 +39,7 @@ addButton.addEventListener("click", () => {
   let book = new Book(title.value, author.value, pages.value, read.checked);
   displayNewBooks(book);
   addBookToLibrary(book);
+  console.log(myLibrary);
   title.value = "";
   author.value = "";
   pages.value = "";
@@ -62,8 +63,12 @@ function displayNewBooks(book) {
   /* Remove logic */
   const removeButton = document.createElement("button");
   removeButton.textContent = "Delete";
+  let index = myLibrary.indexOf(book); // Get the current index of the book
+  removeButton.dataset.index = index; // Store the index in the button
+
   removeButton.addEventListener("click", () => {
     booklist.removeChild(newBookDiv);
+    myLibrary.splice(index, 1); // Remove the book from the array
   });
   newBookDiv.appendChild(removeButton);
 
